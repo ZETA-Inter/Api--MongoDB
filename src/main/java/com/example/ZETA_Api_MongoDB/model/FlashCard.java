@@ -16,5 +16,5 @@ public class FlashCard {
     private String question;
 
     @NotNull(message = "field 'answer' is null")
-    private String answers;
+    private String answer;
 }

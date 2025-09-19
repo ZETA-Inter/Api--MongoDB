@@ -39,8 +39,8 @@ public class Activity {
         @NotNull(message = "field 'question' is null")
         private String question;
 
-        @NotNull(message = "field 'answer' is null")
-        private List<Answer> answer;
+        @NotNull(message = "field 'answers' is null")
+        private List<Answer> answers;
 
         @Getter
         @Setter
