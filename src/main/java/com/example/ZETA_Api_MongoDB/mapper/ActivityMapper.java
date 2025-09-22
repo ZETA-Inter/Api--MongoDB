@@ -18,7 +18,6 @@ public class ActivityMapper {
     public Activity convertRequestToActivity(ActivityRequestDTO request) {
         Activity activity = new Activity();
         activity.setClassId(request.getClassId());
-        activity.setImages(request.getImages());
         activity.setPoints(request.getPoints());
         activity.setQuestions(request.getQuestions());
         return activity;

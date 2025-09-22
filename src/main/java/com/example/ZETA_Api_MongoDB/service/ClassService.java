@@ -1,6 +1,7 @@
 package com.example.ZETA_Api_MongoDB.service;
 
 import com.example.ZETA_Api_MongoDB.client.PostgresClient;
+import com.example.ZETA_Api_MongoDB.dto.ActivityResponseDTO;
 import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
 import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
@@ -13,6 +14,7 @@ import com.example.ZETA_Api_MongoDB.validation.ClassPatchValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,20 @@ public class ClassService {
     private final ClassPatchValidation validation;
 
     private final ClassMapper mapper;
+
+    public List<ClassResponseDTO> findClassesByProgramId(Integer programId) {
+        List<ClassResponseDTO> classResponseDTOList = listAllFilterByProgramId(programId);
+        List<ActivityResponseDTO> activityResponseDTOList;
+        return null;
+    }
+
+    public List<ClassResponseDTO> listAllFilterByProgramId(Integer programId) {
+        return classRepository.findAll()
+                .stream()
+                .filter(c -> c.getProgramId().equals(programId))
+                .map(c -> mapper.convertClassToResponse(c, client.findProgramById(c.getProgramId())))
+                .toList();
+    }
 
     public List<ClassResponseDTO> listAll() {
         return classRepository.findAll()

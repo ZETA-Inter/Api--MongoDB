@@ -24,8 +24,6 @@ public class Activity {
     @Field(name = "class_id")
     private Integer classId;
 
-    private List<String> images;
-
     private Integer points;
 
     private List<Question> questions;

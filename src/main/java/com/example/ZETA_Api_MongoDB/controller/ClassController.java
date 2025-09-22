@@ -27,9 +27,14 @@ public class ClassController {
         return ResponseEntity.status(200).body(classService.listAll());
     }
 
-    @GetMapping("/find_class_by_id/{id}")
+    @GetMapping("/find_class_by_program_id/{id}")
     public ResponseEntity<ClassResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(200).body(classService.findById(id));
+    }
+
+    @GetMapping("/find_classes_by_id/{program_id}")
+    public ResponseEntity<List<ClassResponseDTO>> findClassesByProgramId(@PathVariable Integer program_id) {
+        return ResponseEntity.status(200).body(null);
     }
 
     @PostMapping("/create_class")

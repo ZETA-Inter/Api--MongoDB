@@ -20,8 +20,6 @@ public class ActivityRequestDTO {
     @Min(value = 0, message = "'ClassId' can't be less than 1")
     private Integer classId;
 
-    private List<String> images;
-
     @Min(value = 0, message = "'Points' can't be less than 1")
     private Integer points;
 
