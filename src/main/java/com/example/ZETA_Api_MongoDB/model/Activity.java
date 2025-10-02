@@ -1,5 +1,6 @@
 package com.example.ZETA_Api_MongoDB.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +25,6 @@ public class Activity {
     @Field(name = "class_id")
     private Integer classId;
 
-    private List<String> images;
-
     private Integer points;
 
     private List<Question> questions;
@@ -35,6 +34,9 @@ public class Activity {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Question {
+
+        @JsonProperty("image_url")
+        private String imageUrl;
 
         @NotNull(message = "field 'question' is null")
         private String question;

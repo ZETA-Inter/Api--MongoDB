@@ -15,9 +15,9 @@ public class ClassMapper {
     public Class convertRequestToClass(ClassRequestDTO request) {
         Class retorno = new Class();
         retorno.setProgramId(request.getProgramId());
-        retorno.setImages(request.getImages());
         retorno.setTitle(request.getTitle());
-        retorno.setText(request.getText());
+        retorno.setDescription(request.getDescription());
+        retorno.setContent(request.getContent());
         retorno.setFlashcards(request.getFlashcards());
         retorno.setLaws(request.getLaws());
         return retorno;
@@ -27,7 +27,8 @@ public class ClassMapper {
         ClassResponseDTO retorno = new ClassResponseDTO();
         retorno.setId(request.getId());
         retorno.setTitle(request.getTitle());
-        retorno.setText(request.getText());
+        retorno.setDescription(request.getDescription());
+        retorno.setContent(request.getContent());
         retorno.setProgramName(program.getName());
         return retorno;
     }

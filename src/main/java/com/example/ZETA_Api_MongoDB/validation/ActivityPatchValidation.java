@@ -21,10 +21,6 @@ public class ActivityPatchValidation {
     public Activity validator(ActivityRequestDTO updates, Activity activity) {
         Map<String, String> errors = new HashMap<>();
 
-        if (updates.getImages() != null && !updates.getImages().isEmpty()) {
-            activity.setImages(updates.getImages());
-        }
-
         if (updates.getQuestions() != null && !updates.getQuestions().isEmpty()) {
             activity.setQuestions(updates.getQuestions());
         }
@@ -33,6 +29,10 @@ public class ActivityPatchValidation {
             if (verifyPoints(updates.getPoints(), errors)) {
                 activity.setPoints(updates.getPoints());
             }
+        }
+
+        if (updates.getQuestions() != null && !updates.getQuestions().isEmpty()) {
+            activity.setQuestions(updates.getQuestions());
         }
 
         if (updates.getClassId() != null) {

@@ -19,29 +19,25 @@ public class ClassPatchValidation {
 
     private final PostgresClient client;
 
-    public Class validator(ClassRequestDTO updates, Class classs) {
+    public Class validator(ClassRequestDTO updates, Class classEntity) {
         Map<String, String> errors = new HashMap<>();
 
         if (StringUtils.isNotEmpty(updates.getTitle())) {
             if (verifyTitle(updates.getTitle(), errors)) {
-                classs.setTitle(updates.getTitle());
+                classEntity.setTitle(updates.getTitle());
             }
         }
 
-        if (updates.getText() != null) {
-            classs.setText(updates.getText());
-        }
-
-        if (updates.getImages() != null && !updates.getImages().isEmpty()) {
-            classs.setImages(updates.getImages());
+        if (updates.getContent() != null && !updates.getContent().isEmpty()) {
+            classEntity.setContent(updates.getContent());
         }
 
         if (updates.getFlashcards() != null && !updates.getFlashcards().isEmpty()) {
-            classs.setFlashcards(updates.getFlashcards());
+            classEntity.setFlashcards(updates.getFlashcards());
         }
 
         if (updates.getLaws() != null && !updates.getLaws().isEmpty()) {
-            classs.setLaws(updates.getLaws());
+            classEntity.setLaws(updates.getLaws());
         }
 
         if (updates.getProgramId() != null) {
@@ -49,14 +45,14 @@ public class ClassPatchValidation {
             if (program == null) {
                 throw new EntityNotFoundException("Program not found");
             }
-            classs.setProgramId(program.getId());
+            classEntity.setProgramId(program.getId());
         }
 
         if (!errors.isEmpty()) {
             throw new MultipleValidationException(errors);
         }
 
-        return classs;
+        return classEntity;
 
     }
 

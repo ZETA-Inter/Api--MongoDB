@@ -19,16 +19,16 @@ import java.util.List;
 public class Class {
 
     @Id
-    private Integer id; // agora é numérico
+    private Integer id;
 
     @Field(name = "program_id")
     private Integer programId;
 
     private String title;
 
-    private List<String> images;
+    private List<Content> content;
 
-    private String text;
+    private String description;
 
     private List<FlashCard> flashcards;
 

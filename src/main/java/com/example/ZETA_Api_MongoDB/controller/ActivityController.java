@@ -2,6 +2,7 @@ package com.example.ZETA_Api_MongoDB.controller;
 
 import com.example.ZETA_Api_MongoDB.dto.ActivityRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ActivityResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
 import com.example.ZETA_Api_MongoDB.service.ActivityService;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
 import com.example.ZETA_Api_MongoDB.validation.OnPatch;
@@ -25,6 +26,11 @@ public class ActivityController {
     @GetMapping("/list_all_activity")
     public ResponseEntity<List<ActivityResponseDTO>> listClasses() {
         return ResponseEntity.status(200).body(activityService.listAll());
+    }
+
+    @GetMapping("/list_all_activities_by_program_id/{id}")
+    public ResponseEntity<List<ActivityResponseDTO>> listAllActivitiesByProgramId(@PathVariable Integer id) {
+        return ResponseEntity.status(200).body(activityService.listAllActivitiesByProgramId(id));
     }
 
     @GetMapping("/find_activity_by_id/{id}")
