@@ -32,7 +32,7 @@ public class ActivityService {
                 .toList();
     }
 
-    public List<ActivityResponseDTO> listAllActivitiesByProgramId(Integer id) {
+    public List<ActivityResponseDTO> listAllActivitiesByClassId(Integer id) {
         return activityRepository.findAll()
                 .stream()
                 .filter(a -> Objects.equals(a.getClassId(), id))

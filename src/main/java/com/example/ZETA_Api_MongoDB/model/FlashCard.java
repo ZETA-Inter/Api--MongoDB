@@ -12,9 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class FlashCard {
 
-    @NotNull(message = "field 'question' is null")
-    private String question;
+    @NotNull(message = "field 'front' is null")
+    private String front;
 
-    @NotNull(message = "field 'answer' is null")
-    private String answer;
+    @NotNull(message = "field 'back' is null")
+    private String back;
 }

@@ -22,13 +22,14 @@ public class ClassMapper {
         return retorno;
     }
 
-    public ClassResponseDTO convertClassToResponse(Class request, ProgramResponseDTO program) {
+    public ClassResponseDTO convertClassToResponse(Class request) {
         ClassResponseDTO retorno = new ClassResponseDTO();
         retorno.setId(request.getId());
         retorno.setTitle(request.getTitle());
         retorno.setDescription(request.getDescription());
         retorno.setContent(request.getContent());
-        retorno.setProgramName(program.getName());
+        retorno.setFlashcards(request.getFlashcards());
+        retorno.setLaws(request.getLaws());
         return retorno;
     }
 

@@ -12,8 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Law {
 
-    @NotNull(message = "field 'title' is null")
-    private String title;
+    @NotNull(message = "field 'number' is null")
+    private String number;
 
     @NotNull(message = "field 'description' is null")
     private String description;
