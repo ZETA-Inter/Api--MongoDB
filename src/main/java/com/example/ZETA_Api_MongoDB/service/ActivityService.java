@@ -62,7 +62,7 @@ public class ActivityService {
     }
 
     public void updateActivity(Integer id, ActivityRequestDTO request) {
-        Activity exists = activityRepository.findById(id)
+        activityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Activity not found!"));
         Activity newClass = mapper.convertRequestToActivity(request);
         newClass.setId(id);

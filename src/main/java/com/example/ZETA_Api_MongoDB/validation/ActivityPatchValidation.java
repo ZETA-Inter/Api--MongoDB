@@ -36,7 +36,7 @@ public class ActivityPatchValidation {
         }
 
         if (updates.getClassId() != null) {
-            Class classs = classRepository.findById(updates.getClassId())
+            classRepository.findById(updates.getClassId())
                     .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
             activity.setClassId(updates.getClassId());
         }

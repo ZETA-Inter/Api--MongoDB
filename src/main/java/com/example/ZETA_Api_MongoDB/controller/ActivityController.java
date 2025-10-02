@@ -2,7 +2,6 @@ package com.example.ZETA_Api_MongoDB.controller;
 
 import com.example.ZETA_Api_MongoDB.dto.ActivityRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ActivityResponseDTO;
-import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
 import com.example.ZETA_Api_MongoDB.service.ActivityService;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
 import com.example.ZETA_Api_MongoDB.validation.OnPatch;

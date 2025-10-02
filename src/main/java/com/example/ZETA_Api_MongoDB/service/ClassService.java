@@ -80,7 +80,7 @@ public class ClassService {
     }
 
     public void updateClass(Integer id, ClassRequestDTO request) {
-        Class exists = classRepository.findById(id)
+        classRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
 
         ProgramResponseDTO program = client.findProgramById(request.getProgramId());

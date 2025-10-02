@@ -1,6 +1,5 @@
 package com.example.ZETA_Api_MongoDB.dto;
 
-import com.example.ZETA_Api_MongoDB.model.Activity.Question;
 import com.example.ZETA_Api_MongoDB.model.Content;
 import com.example.ZETA_Api_MongoDB.model.FlashCard;
 import com.example.ZETA_Api_MongoDB.model.Law;
