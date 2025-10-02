@@ -22,6 +22,5 @@ public class ClassResponseDTO {
     private String description;
     private List<FlashCard> flashcards;
     private List<Law> laws;
-    private String programName;
 
 }

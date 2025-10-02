@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ActivityResponseDTO {
     private Integer id;
-    private String ClassTitle;
     private Integer points;
     private List<Activity.Question> questions;
 }

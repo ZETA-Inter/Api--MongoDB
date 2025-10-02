@@ -34,7 +34,7 @@ public class ClassService {
     public List<ClassResponseDTO> listAll() {
         return classRepository.findAll()
                 .stream()
-                .map(c -> mapper.convertClassToResponse(c, client.findProgramById(c.getProgramId())))
+                .map(mapper::convertClassToResponse)
                 .toList();
     }
 
@@ -42,7 +42,7 @@ public class ClassService {
         return classRepository.findAll()
                 .stream()
                 .filter(c -> Objects.equals(c.getProgramId(), id))
-                .map(c -> mapper.convertClassToResponse(c, client.findProgramById(c.getProgramId())))
+                .map(mapper::convertClassToResponse)
                 .toList();
     }
 
@@ -50,9 +50,7 @@ public class ClassService {
         Class classExists = classRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
 
-        ProgramResponseDTO program = client.findProgramById(classExists.getProgramId());
-
-        return mapper.convertClassToResponse(classExists, program);
+        return mapper.convertClassToResponse(classExists);
     }
 
     public ClassResponseDTO createClass(ClassRequestDTO request) {
@@ -69,7 +67,7 @@ public class ClassService {
         Class newClass = mapper.convertRequestToClass(request);
         newClass.setId(sequenceGenerator.getNextSequence("class"));
         classRepository.save(newClass);
-        return mapper.convertClassToResponse(newClass, program);
+        return mapper.convertClassToResponse(newClass);
     }
 
     public void deleteById(Integer id) {

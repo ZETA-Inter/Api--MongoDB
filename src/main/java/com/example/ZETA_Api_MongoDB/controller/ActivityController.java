@@ -27,9 +27,9 @@ public class ActivityController {
         return ResponseEntity.status(200).body(activityService.listAll());
     }
 
-    @GetMapping("/list_all_activities_by_program_id/{id}")
-    public ResponseEntity<List<ActivityResponseDTO>> listAllActivitiesByProgramId(@PathVariable Integer id) {
-        return ResponseEntity.status(200).body(activityService.listAllActivitiesByProgramId(id));
+    @GetMapping("/list_all_activities_by_class_id/{id}")
+    public ResponseEntity<List<ActivityResponseDTO>> listAllActivitiesByClassId(@PathVariable Integer id) {
+        return ResponseEntity.status(200).body(activityService.listAllActivitiesByClassId(id));
     }
 
     @GetMapping("/find_activity_by_id/{id}")

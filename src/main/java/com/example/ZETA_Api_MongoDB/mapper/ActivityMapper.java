@@ -24,14 +24,10 @@ public class ActivityMapper {
     }
 
     public ActivityResponseDTO convertActivityToResponse(Activity activity) {
-        Class newClass = classRepository.findById(activity.getClassId())
-                .orElseThrow(() -> new EntityNotFoundException("Class not found"));
-
         ActivityResponseDTO response = new ActivityResponseDTO();
         response.setId(activity.getId());
         response.setQuestions(activity.getQuestions());
         response.setPoints(activity.getPoints());
-        response.setClassTitle(newClass.getTitle());
         return response;
     }
 
