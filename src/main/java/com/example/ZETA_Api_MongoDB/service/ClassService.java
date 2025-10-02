@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -33,6 +34,14 @@ public class ClassService {
     public List<ClassResponseDTO> listAll() {
         return classRepository.findAll()
                 .stream()
+                .map(c -> mapper.convertClassToResponse(c, client.findProgramById(c.getProgramId())))
+                .toList();
+    }
+
+    public List<ClassResponseDTO> listAllClassesByProgramId(Integer id) {
+        return classRepository.findAll()
+                .stream()
+                .filter(c -> Objects.equals(c.getProgramId(), id))
                 .map(c -> mapper.convertClassToResponse(c, client.findProgramById(c.getProgramId())))
                 .toList();
     }
@@ -71,7 +80,7 @@ public class ClassService {
     }
 
     public void updateClass(Integer id, ClassRequestDTO request) {
-        Class exists = classRepository.findById(id)
+        classRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
 
         ProgramResponseDTO program = client.findProgramById(request.getProgramId());

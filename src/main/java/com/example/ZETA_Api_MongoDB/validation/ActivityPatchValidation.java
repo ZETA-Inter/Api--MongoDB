@@ -21,10 +21,6 @@ public class ActivityPatchValidation {
     public Activity validator(ActivityRequestDTO updates, Activity activity) {
         Map<String, String> errors = new HashMap<>();
 
-        if (updates.getImages() != null && !updates.getImages().isEmpty()) {
-            activity.setImages(updates.getImages());
-        }
-
         if (updates.getQuestions() != null && !updates.getQuestions().isEmpty()) {
             activity.setQuestions(updates.getQuestions());
         }
@@ -35,8 +31,12 @@ public class ActivityPatchValidation {
             }
         }
 
+        if (updates.getQuestions() != null && !updates.getQuestions().isEmpty()) {
+            activity.setQuestions(updates.getQuestions());
+        }
+
         if (updates.getClassId() != null) {
-            Class classs = classRepository.findById(updates.getClassId())
+            classRepository.findById(updates.getClassId())
                     .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
             activity.setClassId(updates.getClassId());
         }

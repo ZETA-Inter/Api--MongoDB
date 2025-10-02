@@ -27,6 +27,11 @@ public class ClassController {
         return ResponseEntity.status(200).body(classService.listAll());
     }
 
+    @GetMapping("/list_all_class_by_program_id/{id}")
+    public ResponseEntity<List<ClassResponseDTO>> listAllClassesByProgramId(@PathVariable Integer id) {
+        return ResponseEntity.status(200).body(classService.listAllClassesByProgramId(id));
+    }
+
     @GetMapping("/find_class_by_id/{id}")
     public ResponseEntity<ClassResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(200).body(classService.findById(id));

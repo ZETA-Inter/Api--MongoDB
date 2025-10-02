@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -27,7 +28,15 @@ public class ActivityService {
     public List<ActivityResponseDTO> listAll() {
         return activityRepository.findAll()
                 .stream()
-                .map(c -> mapper.convertActivityToResponse(c))
+                .map(mapper::convertActivityToResponse)
+                .toList();
+    }
+
+    public List<ActivityResponseDTO> listAllActivitiesByProgramId(Integer id) {
+        return activityRepository.findAll()
+                .stream()
+                .filter(a -> Objects.equals(a.getClassId(), id))
+                .map(mapper::convertActivityToResponse)
                 .toList();
     }
 
@@ -53,7 +62,7 @@ public class ActivityService {
     }
 
     public void updateActivity(Integer id, ActivityRequestDTO request) {
-        Activity exists = activityRepository.findById(id)
+        activityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Activity not found!"));
         Activity newClass = mapper.convertRequestToActivity(request);
         newClass.setId(id);
