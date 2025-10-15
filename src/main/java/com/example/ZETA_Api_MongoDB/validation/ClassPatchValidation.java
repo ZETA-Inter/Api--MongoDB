@@ -1,6 +1,5 @@
 package com.example.ZETA_Api_MongoDB.validation;
 
-import com.example.ZETA_Api_MongoDB.client.PostgresClient;
 import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.MultipleValidationException;
@@ -15,8 +14,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Component
 public class ClassPatchValidation {
-
-    private final PostgresClient client;
 
     public Class validator(ClassRequestDTO updates, Class classEntity, ProgramResponseDTO programResponseDTO) {
         Map<String, String> errors = new HashMap<>();
