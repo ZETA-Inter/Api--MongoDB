@@ -3,7 +3,6 @@ package com.example.ZETA_Api_MongoDB.validation;
 import com.example.ZETA_Api_MongoDB.client.PostgresClient;
 import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
-import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.exception.MultipleValidationException;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;

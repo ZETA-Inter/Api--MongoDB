@@ -2,7 +2,6 @@ package com.example.ZETA_Api_MongoDB.mapper;
 
 import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
-import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
 import com.example.ZETA_Api_MongoDB.model.Class;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
