@@ -1,4 +1,4 @@
-package com.example.ZETA_Api_MongoDB.dto;
+package com.example.ZETA_Api_MongoDB.dto.response;
 
 import com.example.ZETA_Api_MongoDB.model.Content;
 import com.example.ZETA_Api_MongoDB.model.FlashCard;

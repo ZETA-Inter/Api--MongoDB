@@ -1,4 +1,4 @@
-package com.example.ZETA_Api_MongoDB.dto;
+package com.example.ZETA_Api_MongoDB.dto.request;
 
 import com.example.ZETA_Api_MongoDB.model.Activity;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;

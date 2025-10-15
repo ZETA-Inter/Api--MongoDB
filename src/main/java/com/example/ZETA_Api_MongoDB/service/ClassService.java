@@ -1,9 +1,9 @@
 package com.example.ZETA_Api_MongoDB.service;
 
 import com.example.ZETA_Api_MongoDB.client.PostgresClient;
-import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
-import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
-import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.request.ClassRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ClassResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ProgramResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.EntityAlreadyExistsException;
 import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.mapper.ClassMapper;

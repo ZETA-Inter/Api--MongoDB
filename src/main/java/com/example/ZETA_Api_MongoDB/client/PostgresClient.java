@@ -1,6 +1,6 @@
 package com.example.ZETA_Api_MongoDB.client;
 
-import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ProgramResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

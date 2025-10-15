@@ -1,6 +1,7 @@
 package com.example.ZETA_Api_MongoDB.service;
 
-import com.example.ZETA_Api_MongoDB.dto.*;
+import com.example.ZETA_Api_MongoDB.dto.request.ActivityRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ActivityResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.mapper.ActivityMapper;
 import com.example.ZETA_Api_MongoDB.model.Activity;

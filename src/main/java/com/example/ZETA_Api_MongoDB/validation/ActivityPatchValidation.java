@@ -1,6 +1,6 @@
 package com.example.ZETA_Api_MongoDB.validation;
 
-import com.example.ZETA_Api_MongoDB.dto.ActivityRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.request.ActivityRequestDTO;
 import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.exception.MultipleValidationException;
 import com.example.ZETA_Api_MongoDB.model.Activity;
