@@ -53,6 +53,11 @@ public class ClassService {
         return mapper.convertClassToResponse(classExists);
     }
 
+    public void findEntityExistsById(Integer id) {
+        classRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
+    }
+
     public ClassResponseDTO createClass(ClassRequestDTO request) {
         if (classRepository.findByTitle(request.getTitle()) != null) {
             throw new EntityAlreadyExistsException("Class already exists!");
