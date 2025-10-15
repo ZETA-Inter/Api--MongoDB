@@ -61,7 +61,7 @@ public class ClassService {
         ProgramResponseDTO program = client.findProgramById(request.getProgramId());
 
         if (program == null) {
-            throw new EntityNotFoundException("Program not found!");
+            throw new EntityNotFoundException("Program with id=" + request.getProgramId() + "not found!");
         }
 
         Class newClass = mapper.convertRequestToClass(request);
@@ -95,7 +95,12 @@ public class ClassService {
     public void partiallyUpdateClass(Integer id, ClassRequestDTO request) {
         Optional<Class> exists = classRepository.findById(id);
         if (exists.isPresent()) {
-            Class newClass = validation.validator(request, exists.get());
+            ProgramResponseDTO program = client.findProgramById(request.getProgramId());
+            if (program == null) {
+                throw new EntityNotFoundException("Program not found");
+            }
+
+            Class newClass = validation.validator(request, exists.get(), program);
 
             classRepository.save(newClass);
         } else {

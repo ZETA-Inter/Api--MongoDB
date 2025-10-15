@@ -19,7 +19,7 @@ public class ClassPatchValidation {
 
     private final PostgresClient client;
 
-    public Class validator(ClassRequestDTO updates, Class classEntity) {
+    public Class validator(ClassRequestDTO updates, Class classEntity, ProgramResponseDTO programResponseDTO) {
         Map<String, String> errors = new HashMap<>();
 
         if (StringUtils.isNotEmpty(updates.getTitle())) {
@@ -40,12 +40,8 @@ public class ClassPatchValidation {
             classEntity.setLaws(updates.getLaws());
         }
 
-        if (updates.getProgramId() != null) {
-            ProgramResponseDTO program = client.findProgramById(updates.getProgramId());
-            if (program == null) {
-                throw new EntityNotFoundException("Program not found");
-            }
-            classEntity.setProgramId(program.getId());
+        if (programResponseDTO != null) {
+            classEntity.setProgramId(programResponseDTO.getId());
         }
 
         if (!errors.isEmpty()) {

@@ -19,18 +19,23 @@ import java.util.List;
 @AllArgsConstructor
 public class ClassRequestDTO {
 
+    @NotNull(message = "field 'programId' is null", groups = OnCreate.class)
     @Min(value = 0, message = "'ProgramId' can't be less than 1")
     private Integer programId;
 
     @NotNull(message = "field 'title' is null", groups = OnCreate.class)
     private String title;
 
+    @NotNull(message = "field 'content' is null", groups = OnCreate.class)
     private List<Content> content;
 
+    @NotNull(message = "field 'description' is null", groups = OnCreate.class)
     private String description;
 
+    @NotNull(message = "field 'flashcards' is null", groups = OnCreate.class)
     private List<FlashCard> flashcards;
 
+    @NotNull(message = "field 'laws' is null", groups = OnCreate.class)
     private List<Law> laws;
 
 }
