@@ -1,6 +1,7 @@
 package com.example.ZETA_Api_MongoDB.service;
 
-import com.example.ZETA_Api_MongoDB.dto.*;
+import com.example.ZETA_Api_MongoDB.dto.request.ActivityRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ActivityResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.mapper.ActivityMapper;
 import com.example.ZETA_Api_MongoDB.model.Activity;
@@ -22,6 +23,8 @@ public class ActivityService {
     private final ActivityMapper mapper;
 
     private final ActivityPatchValidation validation;
+
+    private final ClassService classService;
 
     private final SequenceGeneratorService sequenceGenerator;
 
@@ -48,6 +51,9 @@ public class ActivityService {
     }
 
     public ActivityResponseDTO createActivity(ActivityRequestDTO request) {
+
+        classService.findEntityExistsById(request.getClassId());
+
         Activity activity = mapper.convertRequestToActivity(request);
         activity.setId(sequenceGenerator.getNextSequence("activity"));
         activityRepository.save(activity);
@@ -64,6 +70,9 @@ public class ActivityService {
     public void updateActivity(Integer id, ActivityRequestDTO request) {
         activityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Activity not found!"));
+
+        classService.findEntityExistsById(request.getClassId());
+
         Activity newClass = mapper.convertRequestToActivity(request);
         newClass.setId(id);
         activityRepository.save(newClass);
@@ -72,6 +81,11 @@ public class ActivityService {
     public void partiallyUpdateActivity(Integer id, ActivityRequestDTO request) {
         Optional<Activity> exists = activityRepository.findById(id);
         if (exists.isPresent()) {
+
+            if (request.getClassId() != null) {
+                classService.findEntityExistsById(request.getClassId());
+            }
+
             Activity newActivity = validation.validator(request, exists.get());
 
             activityRepository.save(newActivity);

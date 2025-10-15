@@ -1,9 +1,9 @@
 package com.example.ZETA_Api_MongoDB.service;
 
 import com.example.ZETA_Api_MongoDB.client.PostgresClient;
-import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
-import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
-import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.request.ClassRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ClassResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ProgramResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.EntityAlreadyExistsException;
 import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
 import com.example.ZETA_Api_MongoDB.mapper.ClassMapper;
@@ -53,6 +53,11 @@ public class ClassService {
         return mapper.convertClassToResponse(classExists);
     }
 
+    public void findEntityExistsById(Integer id) {
+        classRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Class not found!"));
+    }
+
     public ClassResponseDTO createClass(ClassRequestDTO request) {
         if (classRepository.findByTitle(request.getTitle()) != null) {
             throw new EntityAlreadyExistsException("Class already exists!");
@@ -61,7 +66,7 @@ public class ClassService {
         ProgramResponseDTO program = client.findProgramById(request.getProgramId());
 
         if (program == null) {
-            throw new EntityNotFoundException("Program not found!");
+            throw new EntityNotFoundException("Program with id=" + request.getProgramId() + "not found!");
         }
 
         Class newClass = mapper.convertRequestToClass(request);
@@ -95,7 +100,17 @@ public class ClassService {
     public void partiallyUpdateClass(Integer id, ClassRequestDTO request) {
         Optional<Class> exists = classRepository.findById(id);
         if (exists.isPresent()) {
-            Class newClass = validation.validator(request, exists.get());
+
+            ProgramResponseDTO program = null;
+
+            if (request.getProgramId() != null) {
+                program = client.findProgramById(request.getProgramId());
+                if (program == null) {
+                    throw new EntityNotFoundException("Program not found");
+                }
+            }
+
+            Class newClass = validation.validator(request, exists.get(), program);
 
             classRepository.save(newClass);
         } else {

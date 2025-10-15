@@ -1,11 +1,8 @@
-package com.example.ZETA_Api_MongoDB.dto;
+package com.example.ZETA_Api_MongoDB.dto.response;
 
 import com.example.ZETA_Api_MongoDB.model.Content;
 import com.example.ZETA_Api_MongoDB.model.FlashCard;
 import com.example.ZETA_Api_MongoDB.model.Law;
-import com.example.ZETA_Api_MongoDB.validation.OnCreate;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,20 +14,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassRequestDTO {
+public class ClassResponseDTO {
 
-    @Min(value = 0, message = "'ProgramId' can't be less than 1")
-    private Integer programId;
-
-    @NotNull(message = "field 'title' is null", groups = OnCreate.class)
+    private Integer id;
     private String title;
-
     private List<Content> content;
-
     private String description;
-
     private List<FlashCard> flashcards;
-
     private List<Law> laws;
 
 }

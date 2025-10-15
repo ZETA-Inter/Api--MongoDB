@@ -1,9 +1,7 @@
 package com.example.ZETA_Api_MongoDB.validation;
 
-import com.example.ZETA_Api_MongoDB.client.PostgresClient;
-import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
-import com.example.ZETA_Api_MongoDB.dto.ProgramResponseDTO;
-import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
+import com.example.ZETA_Api_MongoDB.dto.request.ClassRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ProgramResponseDTO;
 import com.example.ZETA_Api_MongoDB.exception.MultipleValidationException;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +15,7 @@ import java.util.Map;
 @Component
 public class ClassPatchValidation {
 
-    private final PostgresClient client;
-
-    public Class validator(ClassRequestDTO updates, Class classEntity) {
+    public Class validator(ClassRequestDTO updates, Class classEntity, ProgramResponseDTO programResponseDTO) {
         Map<String, String> errors = new HashMap<>();
 
         if (StringUtils.isNotEmpty(updates.getTitle())) {
@@ -40,12 +36,8 @@ public class ClassPatchValidation {
             classEntity.setLaws(updates.getLaws());
         }
 
-        if (updates.getProgramId() != null) {
-            ProgramResponseDTO program = client.findProgramById(updates.getProgramId());
-            if (program == null) {
-                throw new EntityNotFoundException("Program not found");
-            }
-            classEntity.setProgramId(program.getId());
+        if (programResponseDTO != null) {
+            classEntity.setProgramId(programResponseDTO.getId());
         }
 
         if (!errors.isEmpty()) {

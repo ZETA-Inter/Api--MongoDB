@@ -1,7 +1,7 @@
 package com.example.ZETA_Api_MongoDB.controller;
 
-import com.example.ZETA_Api_MongoDB.dto.ClassRequestDTO;
-import com.example.ZETA_Api_MongoDB.dto.ClassResponseDTO;
+import com.example.ZETA_Api_MongoDB.dto.request.ClassRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ClassResponseDTO;
 import com.example.ZETA_Api_MongoDB.service.ClassService;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
 import com.example.ZETA_Api_MongoDB.validation.OnPatch;
@@ -22,39 +22,39 @@ public class ClassController {
 
     private final ClassService classService;
 
-    @GetMapping("/list_all_class")
+    @GetMapping("/list-all-class")
     public ResponseEntity<List<ClassResponseDTO>> listClasses() {
         return ResponseEntity.status(200).body(classService.listAll());
     }
 
-    @GetMapping("/list_all_class_by_program_id/{id}")
+    @GetMapping("/list-all-class-by-program-id/{id}")
     public ResponseEntity<List<ClassResponseDTO>> listAllClassesByProgramId(@PathVariable Integer id) {
         return ResponseEntity.status(200).body(classService.listAllClassesByProgramId(id));
     }
 
-    @GetMapping("/find_class_by_id/{id}")
+    @GetMapping("/find-class-by-id/{id}")
     public ResponseEntity<ClassResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(200).body(classService.findById(id));
     }
 
-    @PostMapping("/create_class")
+    @PostMapping("/create-class")
     public ResponseEntity<ClassResponseDTO> create(@RequestBody @Valid ClassRequestDTO classRequestDTO) {
         return ResponseEntity.status(201).body(classService.createClass(classRequestDTO));
     }
 
-    @DeleteMapping("/delete_class_by_id/{id}")
+    @DeleteMapping("/delete-class-by-id/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         classService.deleteById(id);
         return ResponseEntity.status(200).body("Class with ID "+ id +" deleted sucessfully!");
     }
 
-    @PostMapping("/update_class/{id}")
+    @PostMapping("/update-class/{id}")
     public ResponseEntity<String> updateClass(@PathVariable Integer id, @RequestBody @Validated({OnCreate.class, Default.class}) ClassRequestDTO classRequestDTO) {
         classService.updateClass(id, classRequestDTO);
         return ResponseEntity.status(200).body("Class with ID "+ id +" updated successfully!");
     }
 
-    @PatchMapping("/update_class/{id}")
+    @PatchMapping("/update-class/{id}")
     public ResponseEntity<String> partiallyUpdateClass(@PathVariable Integer id, @RequestBody @Validated({OnPatch.class, Default.class}) ClassRequestDTO classRequestDTO) {
         classService.partiallyUpdateClass(id, classRequestDTO);
         return ResponseEntity.status(200).body("Class with ID "+ id +" partially updated successfully!");

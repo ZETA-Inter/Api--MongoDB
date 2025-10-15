@@ -1,10 +1,8 @@
 package com.example.ZETA_Api_MongoDB.mapper;
 
-import com.example.ZETA_Api_MongoDB.dto.ActivityRequestDTO;
-import com.example.ZETA_Api_MongoDB.dto.ActivityResponseDTO;
-import com.example.ZETA_Api_MongoDB.exception.EntityNotFoundException;
+import com.example.ZETA_Api_MongoDB.dto.request.ActivityRequestDTO;
+import com.example.ZETA_Api_MongoDB.dto.response.ActivityResponseDTO;
 import com.example.ZETA_Api_MongoDB.model.Activity;
-import com.example.ZETA_Api_MongoDB.model.Class;
 import com.example.ZETA_Api_MongoDB.repository.ClassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
