@@ -95,9 +95,14 @@ public class ClassService {
     public void partiallyUpdateClass(Integer id, ClassRequestDTO request) {
         Optional<Class> exists = classRepository.findById(id);
         if (exists.isPresent()) {
-            ProgramResponseDTO program = client.findProgramById(request.getProgramId());
-            if (program == null) {
-                throw new EntityNotFoundException("Program not found");
+
+            ProgramResponseDTO program = null;
+
+            if (request.getProgramId() != null) {
+                program = client.findProgramById(request.getProgramId());
+                if (program == null) {
+                    throw new EntityNotFoundException("Program not found");
+                }
             }
 
             Class newClass = validation.validator(request, exists.get(), program);
