@@ -14,10 +14,12 @@ import java.util.List;
 
 public class TokenAuthFilter extends OncePerRequestFilter {
 
-    private final String fixedToken;
+    private final String userToken;
+    private final String adminToken;
 
-    public TokenAuthFilter(String fixedToken) {
-        this.fixedToken = fixedToken;
+    public TokenAuthFilter(String userToken, String adminToken) {
+        this.userToken = userToken;
+        this.adminToken = adminToken;
     }
 
     @Override
@@ -38,19 +40,31 @@ public class TokenAuthFilter extends OncePerRequestFilter {
         }
 
         String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.equals("Bearer " + fixedToken)) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido ou ausente");
+        if (authHeader == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token ausente");
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(
-                        "tokenUser",
-                        null,
-                        List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
-                );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UsernamePasswordAuthenticationToken authentication;
 
+        if (authHeader.equals("Bearer " + adminToken)) {
+            authentication = new UsernamePasswordAuthenticationToken(
+                    "adminUser",
+                    null,
+                    List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
+            );
+        } else if (authHeader.equals("Bearer " + userToken)) {
+            authentication = new UsernamePasswordAuthenticationToken(
+                    "normalUser",
+                    null,
+                    List.of(new SimpleGrantedAuthority("ROLE_USER"))
+            );
+        } else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
+            return;
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 }

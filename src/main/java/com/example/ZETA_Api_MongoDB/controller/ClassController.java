@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(name = "/api/classes")
+@RequestMapping("/api/classes")
 public class ClassController {
 
     private final ClassService classService;
@@ -43,6 +44,7 @@ public class ClassController {
     }
 
     @DeleteMapping("/delete-class-by-id/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         classService.deleteById(id);
         return ResponseEntity.status(200).body("Class with ID "+ id +" deleted sucessfully!");
