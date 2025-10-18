@@ -35,9 +35,6 @@ public class Activity {
     @AllArgsConstructor
     public static class Question {
 
-        @JsonProperty("image_url")
-        private String imageUrl;
-
         @NotNull(message = "field 'question' is null")
         private String question;
 
