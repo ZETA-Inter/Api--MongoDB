@@ -12,15 +12,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
 
     @Autowired
-    CustomAcessDeniedHandler customAcessDeniedHandler;
+    private CustomAcessDeniedHandler customAcessDeniedHandler;
+
+    @Autowired
+    private CustomAuthEntryPoint customAuthEntryPoint;
 
     @Value("${ADMIN_PASSWORD}")
     private String adminPassword;
+
+    @Value("${TOKEN_AUTH}")
+    private String token;
 
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder encoder) {
@@ -37,31 +44,26 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public TokenAuthFilter tokenAuthFilter() {
+        return new TokenAuthFilter(token);
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, TokenAuthFilter tokenAuthFilter) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // API REST não precisa de CSRF
-
-                .authorizeHttpRequests(auth -> auth
-                        // Swagger protegido apenas para ADMIN
-                        .requestMatchers(
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**",
-                                "/swagger-resources/**"
-                        ).hasRole("ADMIN")
-
-                        // API pública
-                        .requestMatchers("/api/**").permitAll()
-
-                        // Qualquer outra rota precisa autenticação
-                        .anyRequest().authenticated()
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")
+                .anyRequest().authenticated()
+            )
+                .addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(customAuthEntryPoint)
+                        .accessDeniedHandler(customAcessDeniedHandler)
                 )
-
-                .httpBasic(Customizer.withDefaults()) // Basic Auth para Swagger
-                .formLogin(Customizer.withDefaults())  // Form login opcional para Swagger
-                .logout(Customizer.withDefaults())
-
-                .exceptionHandling(ex -> ex.accessDeniedHandler(customAcessDeniedHandler));
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults());
 
         return http.build();
     }
