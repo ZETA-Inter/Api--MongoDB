@@ -1,6 +1,5 @@
 package com.example.ZETA_Api_MongoDB.dto.request;
 
-import com.example.ZETA_Api_MongoDB.model.Content;
 import com.example.ZETA_Api_MongoDB.model.FlashCard;
 import com.example.ZETA_Api_MongoDB.model.Law;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
@@ -27,7 +26,7 @@ public class ClassRequestDTO {
     private String title;
 
     @NotNull(message = "field 'content' is null", groups = OnCreate.class)
-    private List<Content> content;
+    private List<String> content;
 
     @NotNull(message = "field 'description' is null", groups = OnCreate.class)
     private String description;

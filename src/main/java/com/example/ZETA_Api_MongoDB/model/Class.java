@@ -25,7 +25,7 @@ public class Class {
 
     private String title;
 
-    private List<Content> content;
+    private List<String> content;
 
     private String description;
 
