@@ -1,6 +1,5 @@
 package com.example.ZETA_Api_MongoDB.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
