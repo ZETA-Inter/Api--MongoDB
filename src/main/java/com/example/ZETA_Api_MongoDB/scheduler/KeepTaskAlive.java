@@ -14,21 +14,14 @@ public class KeepTaskAlive {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${TOKEN_USER}")
-    private String adminToken;
+    private String userToken;
 
     @Scheduled(fixedRate = 600000)
     public void ping() {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Bearer " + adminToken);
-            headers.setAccept(List.of(MediaType.APPLICATION_JSON));
 
-            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
-
-            ResponseEntity<String> response = restTemplate.exchange(
-                    "https://api-mongodb-fjnf.onrender.com//api/ping",
-                    HttpMethod.GET,
-                    requestEntity,
+            ResponseEntity<String> response = restTemplate.getForEntity(
+                    "https://api-postgresql-zeta-fide.onrender.com/api/health",
                     String.class
             );
 
@@ -37,5 +30,4 @@ public class KeepTaskAlive {
             System.out.println("Failure on ping API: " + e.getMessage());
         }
     }
-
 }
