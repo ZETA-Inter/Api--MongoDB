@@ -3,6 +3,7 @@ package com.example.ZETA_Api_MongoDB.controller;
 import com.example.ZETA_Api_MongoDB.dto.request.ClassRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.response.ClassResponseDTO;
 import com.example.ZETA_Api_MongoDB.service.ClassService;
+import com.example.ZETA_Api_MongoDB.swagger.ClassControllerDocs;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
 import com.example.ZETA_Api_MongoDB.validation.OnPatch;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/classes")
-public class ClassController {
+public class ClassController implements ClassControllerDocs {
 
     private final ClassService classService;
 
