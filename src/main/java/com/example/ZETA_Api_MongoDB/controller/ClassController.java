@@ -51,7 +51,7 @@ public class ClassController implements ClassControllerDocs {
         return ResponseEntity.status(200).body("Class with ID "+ id +" deleted sucessfully!");
     }
 
-    @PostMapping("/update-class/{id}")
+    @PutMapping("/update-class/{id}")
     public ResponseEntity<String> updateClass(@PathVariable Integer id, @RequestBody @Validated({OnCreate.class, Default.class}) ClassRequestDTO classRequestDTO) {
         classService.updateClass(id, classRequestDTO);
         return ResponseEntity.status(200).body("Class with ID "+ id +" updated successfully!");

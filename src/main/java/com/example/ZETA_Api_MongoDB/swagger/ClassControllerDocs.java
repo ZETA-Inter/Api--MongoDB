@@ -10,7 +10,7 @@ import java.util.List;
 
 @Tag(
         name = "Classes",
-        description = "Endpoints for managing class entities, including creation, listing, updating, and deletion."
+        description = "Endpoints for managing classes, including creation, listing, updating, and deletion."
 )
 public interface ClassControllerDocs {
 

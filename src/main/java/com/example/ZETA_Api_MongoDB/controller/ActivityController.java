@@ -51,7 +51,7 @@ public class ActivityController implements ActivityControllerDocs {
         return ResponseEntity.status(200).body("Activity with ID "+ id +" deleted sucessfully!");
     }
 
-    @PostMapping("/update_activity/{id}")
+    @PutMapping("/update_activity/{id}")
     public ResponseEntity<String> updateClass(@PathVariable Integer id, @RequestBody @Validated({OnCreate.class, Default.class}) ActivityRequestDTO request) {
         activityService.updateActivity(id, request);
         return ResponseEntity.status(200).body("Activity with ID "+ id +" updated successfully!");
