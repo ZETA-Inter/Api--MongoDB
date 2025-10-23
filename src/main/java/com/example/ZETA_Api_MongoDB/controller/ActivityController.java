@@ -3,6 +3,7 @@ package com.example.ZETA_Api_MongoDB.controller;
 import com.example.ZETA_Api_MongoDB.dto.request.ActivityRequestDTO;
 import com.example.ZETA_Api_MongoDB.dto.response.ActivityResponseDTO;
 import com.example.ZETA_Api_MongoDB.service.ActivityService;
+import com.example.ZETA_Api_MongoDB.swagger.ActivityControllerDocs;
 import com.example.ZETA_Api_MongoDB.validation.OnCreate;
 import com.example.ZETA_Api_MongoDB.validation.OnPatch;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/activities")
-public class ActivityController {
+public class ActivityController implements ActivityControllerDocs {
 
     private final ActivityService activityService;
 
@@ -50,7 +51,7 @@ public class ActivityController {
         return ResponseEntity.status(200).body("Activity with ID "+ id +" deleted sucessfully!");
     }
 
-    @PostMapping("/update_activity/{id}")
+    @PutMapping("/update_activity/{id}")
     public ResponseEntity<String> updateClass(@PathVariable Integer id, @RequestBody @Validated({OnCreate.class, Default.class}) ActivityRequestDTO request) {
         activityService.updateActivity(id, request);
         return ResponseEntity.status(200).body("Activity with ID "+ id +" updated successfully!");
